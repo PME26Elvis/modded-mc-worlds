@@ -1,0 +1,1 @@
+waypoint:Ender Mob Farm:E:6:14:8:14:false:0:gui.xaero_default:false:0
