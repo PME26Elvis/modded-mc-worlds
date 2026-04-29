@@ -1,0 +1,17 @@
+# OS junk
+.DS_Store
+Thumbs.db
+desktop.ini
+
+# Logs / crashes
+**/logs/
+**/crash-reports/
+**/hs_err_pid*.log
+
+# Minecraft temporary / cache-ish files
+**/session.lock
+**/server-icon.png
+
+# Optional: launcher/cache files if accidentally copied
+**/.mixin.out/
+**/cache/

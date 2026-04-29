@@ -1,0 +1,42 @@
+name: Package Minecraft Worlds
+
+on:
+  workflow_dispatch:
+  push:
+    paths:
+      - "packs/**"
+      - "tools/worlds_tool.py"
+      - ".github/workflows/package-worlds.yml"
+
+permissions:
+  contents: read
+
+jobs:
+  package-worlds:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: "3.x"
+
+      - name: Package world saves
+        run: python tools/worlds_tool.py package --out dist
+
+      - name: List packaged files
+        run: |
+          if [ -d dist ]; then
+            find dist -maxdepth 1 -type f -print | sort
+          fi
+
+      - name: Upload packaged worlds
+        if: ${{ hashFiles('dist/*') != '' }}
+        uses: actions/upload-artifact@v4
+        with:
+          name: minecraft-world-zips
+          path: dist/*
+          retention-days: 30
