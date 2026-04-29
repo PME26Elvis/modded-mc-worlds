@@ -9,7 +9,6 @@ desktop.ini
 **/hs_err_pid*.log
 
 # Minecraft temporary / cache-ish files
-**/session.lock
 **/server-icon.png
 
 # Optional: launcher/cache files if accidentally copied
