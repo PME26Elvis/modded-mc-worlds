@@ -1,0 +1,20 @@
+{
+  "accumulatedExperienceDropValue": 10000,
+  "additionalLiquidFuels": [],
+  "amethystTierSpeed": 75,
+  "cacheCapacity": 10,
+  "checkCommonOresName": false,
+  "checkRawOresName": false,
+  "checkUpdates": true,
+  "copperTierSpeed": 175,
+  "diamondTierSpeed": 50,
+  "experienceDropValue": 1,
+  "experienceFluidType": 0,
+  "extremeTierSpeed": 4,
+  "goldTierSpeed": 100,
+  "ironTierSpeed": 150,
+  "netherhotTierSpeed": 8,
+  "platinumTierSpeed": 25,
+  "steelTierSpeed": 125,
+  "ultimateTierSpeed": 1
+}

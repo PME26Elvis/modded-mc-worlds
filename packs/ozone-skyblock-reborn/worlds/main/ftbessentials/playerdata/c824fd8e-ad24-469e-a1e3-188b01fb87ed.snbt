@@ -1,0 +1,24 @@
+{
+	muted: false
+	fly: false
+	god: false
+	nick: ""
+	last_seen: { dim: "minecraft:overworld", x: 267, y: 64, z: 229, time: 1766330833960L, xRot: 38.292664f, yRot: -70.76489f }
+	recording: "none"
+	teleport_history: [
+		{ dim: "twilightforest:twilight_forest", x: 1996, y: 16, z: 2048, time: 1765281098676L, xRot: 26.355444f, yRot: -121.530594f }
+		{ dim: "minecraft:the_nether", x: -196, y: 40, z: 304, time: 1765700479143L, xRot: 27.682499f, yRot: 106.65655f }
+		{ dim: "minecraft:the_nether", x: 66, y: 75, z: 54, time: 1765701397763L, xRot: -3.948817f, yRot: 66.8734f }
+		{ dim: "minecraft:overworld", x: 283, y: 64, z: 248, time: 1765701608317L }
+		{ dim: "ad_astra:moon", x: 270, y: 105, z: 227, time: 1765732283556L, xRot: 33.171593f, yRot: 50.11624f }
+		{ dim: "minecraft:the_end", x: 99, y: 49, z: 0, time: 1765733382221L, xRot: 30.062883f, yRot: 23.655039f }
+		{ dim: "minecraft:the_end", x: 63, y: 52, z: 5, time: 1765733419532L, xRot: 29.185513f, yRot: 159.27551f }
+		{ dim: "ad_astra:mars", x: 292, y: 136, z: 338, time: 1765776853111L, xRot: 41.095356f, yRot: 2.3102417f }
+		{ dim: "minecraft:the_nether", x: -165, y: 76, z: 89, time: 1765777756386L, xRot: 11.383423f, yRot: 172.91689f }
+		{ dim: "ad_astra:venus", x: 271, y: 34, z: 270, time: 1765778888009L, xRot: -53.93509f, yRot: 49.723145f }
+	]
+	homes: {
+		home: { dim: "minecraft:overworld", x: 258, y: 64, z: 247, time: 1763310579485L, xRot: 22.908255f, yRot: 93.93646f }
+	}
+	kit_use_times: { }
+}

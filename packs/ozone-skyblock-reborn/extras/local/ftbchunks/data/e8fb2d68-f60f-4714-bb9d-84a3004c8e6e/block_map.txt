@@ -1,0 +1,17 @@
+#52B53D minecraft:air
+#058353 minecraft:cobblestone
+#7331AC minecraft:cobblestone_slab
+#8F0CC5 craftingstation:crafting_station
+#80497A minecraft:dirt
+#3F84B7 minecraft:grass_block
+#88BAFA minecraft:gravel
+#763000 gravestone:gravestone
+#2EAB88 exdeorum:infested_leaves
+#42717D exdeorum:oak_barrel
+#D32D66 exdeorum:oak_crucible
+#AD9EB5 minecraft:oak_leaves
+#BBA6D1 minecraft:oak_log
+#025489 exdeorum:oak_sieve
+#B90616 botania:root
+#86FC77 minecraft:sand
+#3B1D89 minecraft:stripped_oak_log
