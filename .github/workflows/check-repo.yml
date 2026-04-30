@@ -1,0 +1,119 @@
+name: Check Repository Layout
+
+on:
+
+  workflow_dispatch:
+
+  push:
+
+    paths:
+
+      - "packs/**"
+
+      - ".gitignore"
+
+      - ".github/workflows/check-repo.yml"
+
+jobs:
+
+  check-layout:
+
+    runs-on: ubuntu-latest
+
+    steps:
+
+      - name: Checkout repository
+
+        uses: actions/checkout@v4
+
+      - name: Check pack layout
+
+        run: |
+
+          set -e
+
+          echo "Checking pack folders..."
+
+          for pack in packs/*; do
+
+            [ -d "$pack" ] || continue
+
+            echo "Checking $pack"
+
+            if [ ! -f "$pack/README.md" ]; then
+
+              echo "::warning file=$pack::Missing README.md"
+
+            fi
+
+            if [ ! -d "$pack/worlds" ]; then
+
+              echo "::warning file=$pack::Missing worlds/ directory"
+
+            fi
+
+            if [ ! -d "$pack/extras" ]; then
+
+              echo "::warning file=$pack::Missing extras/ directory"
+
+            fi
+
+          done
+
+      - name: Warn about unwanted files
+
+        run: |
+
+          echo "Checking unwanted files..."
+
+          found=0
+
+          while IFS= read -r file; do
+
+            echo "::warning file=$file::This file probably should not be committed."
+
+            found=1
+
+          done < <(
+
+            find packs \
+
+              \( -path "*/logs/*" \
+
+              -o -path "*/crash-reports/*" \
+
+              -o -path "*/backups/*" \
+
+              -o -name "session.lock" \
+
+              -o -name "*.zip" \
+
+              -o -name "*.7z" \
+
+              -o -name "*.rar" \) \
+
+              -type f
+
+          )
+
+          if [ "$found" -eq 0 ]; then
+
+            echo "No unwanted files found."
+
+          fi
+
+      - name: Show largest files
+
+        run: |
+
+          echo "Largest files:"
+
+          find packs -type f -printf "%s %p\n" | sort -nr | head -30 | awk '{
+
+            size=$1;
+
+            $1="";
+
+            printf "%.2f MiB %s\n", size/1024/1024, $0;
+
+          }'
