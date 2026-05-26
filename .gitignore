@@ -10,7 +10,22 @@ desktop.ini
 
 # Minecraft temporary / cache-ish files
 **/server-icon.png
+**/session.lock
 
 # Optional: launcher/cache files if accidentally copied
 **/.mixin.out/
 **/cache/
+
+# Local staging and generated outputs
+.local-checkpoints/
+.local-releases/
+dist/
+**/backups/
+
+# Archive formats (do not commit checkpoints)
+*.zip
+*.7z
+*.rar
+*.tar
+*.tar.gz
+*.tgz

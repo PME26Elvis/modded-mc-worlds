@@ -1,9 +1,11 @@
 from __future__ import annotations
 
 import argparse
+import json
 import re
 import shutil
 import sys
+from datetime import datetime, timezone
 from pathlib import Path
 from zipfile import ZIP_DEFLATED, ZipFile
 
@@ -153,13 +155,14 @@ def find_world_roots(world_slot: Path) -> list[Path]:
     return roots
 
 
-def add_world_to_zip(source: Path, output: Path) -> None:
+def add_world_to_zip(source: Path, output: Path, prefix: str | None = None) -> None:
     with ZipFile(output, "w", ZIP_DEFLATED) as zf:
         for file in sorted(p for p in source.rglob("*") if p.is_file()):
             rel = file.relative_to(source)
             if is_ignored(rel):
                 continue
-            zf.write(file, rel.as_posix())
+            target = Path(prefix) / rel if prefix else rel
+            zf.write(file, target.as_posix())
 
 
 def copy_existing_archive(pack_name: str, archive: Path, worlds_dir: Path, out_dir: Path) -> Path:
@@ -171,6 +174,14 @@ def copy_existing_archive(pack_name: str, archive: Path, worlds_dir: Path, out_d
     return output
 
 
+def find_main_world_root(pack_dir: Path) -> Path | None:
+    main_dir = pack_dir / "worlds" / "main"
+    if not main_dir.is_dir() or not has_real_files(main_dir):
+        return None
+    roots = find_world_roots(main_dir)
+    return roots[0] if roots else None
+
+
 def package_worlds(out_dir: Path) -> int:
     if out_dir.exists():
         shutil.rmtree(out_dir)
@@ -180,51 +191,88 @@ def package_worlds(out_dir: Path) -> int:
         print("No packs directory found.")
         return 1
 
-    made: list[Path] = []
+    all_dir = out_dir / "all"
+    worlds_dir = out_dir / "worlds"
+    archives_dir = out_dir / "archives"
+    all_dir.mkdir(parents=True, exist_ok=True)
+    worlds_dir.mkdir(parents=True, exist_ok=True)
+    archives_dir.mkdir(parents=True, exist_ok=True)
+
+    timestamp = datetime.now(timezone.utc).strftime("%Y-%m-%d-%H%M")
+    all_zip_name = f"modded-mc-worlds-all-checkpoint-{timestamp}.zip"
+    all_zip = all_dir / all_zip_name
+
     warnings: list[str] = []
+    copied_archives: list[Path] = []
+    per_pack: list[dict[str, str]] = []
 
     for pack_dir in sorted(p for p in PACKS_DIR.iterdir() if p.is_dir()):
         pack_name = pack_dir.name
-        worlds_dir = pack_dir / "worlds"
-        if not worlds_dir.exists():
+        pack_worlds_dir = pack_dir / "worlds"
+        if not pack_worlds_dir.exists():
             warnings.append(f"{pack_name}: missing worlds/")
             continue
 
-        for archive in sorted(p for p in worlds_dir.rglob("*") if p.is_file() and archive_suffix(p)):
-            if is_ignored(archive.relative_to(worlds_dir)):
+        for archive in sorted(p for p in pack_worlds_dir.rglob("*") if p.is_file() and archive_suffix(p)):
+            if is_ignored(archive.relative_to(pack_worlds_dir)):
                 continue
-            output = copy_existing_archive(pack_name, archive, worlds_dir, out_dir)
-            made.append(output)
+            copied = copy_existing_archive(pack_name, archive, pack_worlds_dir, archives_dir)
+            copied_archives.append(copied)
 
-        slots = sorted(p for p in worlds_dir.iterdir() if p.is_dir())
-        for slot in slots:
-            if not has_real_files(slot):
-                continue
+        main_root = find_main_world_root(pack_dir)
+        if main_root is None:
+            warnings.append(f"{pack_name}/main: skipped (no detectable level.dat)")
+            continue
 
-            roots = find_world_roots(slot)
-            if not roots:
-                warnings.append(f"{pack_name}/{slot.name}: non-empty folder, but no level.dat found")
-                continue
+        per_pack_name = f"{safe_name(pack_name)}-main-checkpoint-{timestamp}.zip"
+        per_pack_output = worlds_dir / per_pack_name
+        add_world_to_zip(main_root, per_pack_output)
 
-            for root in roots:
-                if root == slot:
-                    world_name = slot.name
-                else:
-                    world_name = f"{slot.name}-{root.name}"
-                output = out_dir / f"{safe_name(pack_name)}-{safe_name(world_name)}.zip"
-                add_world_to_zip(root, output)
-                made.append(output)
+        per_pack.append(
+            {
+                "pack_slug": pack_name,
+                "archive": str(per_pack_output.relative_to(ROOT)),
+                "artifact_name": f"minecraft-world-{safe_name(pack_name)}-main",
+                "world_root": str(main_root.relative_to(ROOT)),
+            }
+        )
+
+    if per_pack:
+        with ZipFile(all_zip, "w", ZIP_DEFLATED) as zf:
+            for entry in per_pack:
+                world_root = ROOT / entry["world_root"]
+                prefix = f"{entry['pack_slug']}-main"
+                for file in sorted(p for p in world_root.rglob("*") if p.is_file()):
+                    rel = file.relative_to(world_root)
+                    if is_ignored(rel):
+                        continue
+                    zf.write(file, (Path(prefix) / rel).as_posix())
+
+    manifest = {
+        "generated_at_utc": datetime.now(timezone.utc).isoformat(),
+        "combined_archive": str(all_zip.relative_to(ROOT)) if per_pack else None,
+        "combined_artifact_name": "minecraft-worlds-all" if per_pack else None,
+        "per_pack_archives": per_pack,
+        "copied_existing_archives": [str(p.relative_to(ROOT)) for p in copied_archives],
+    }
+    manifest_path = out_dir / "manifest.json"
+    manifest_path.write_text(json.dumps(manifest, indent=2) + "\n", encoding="utf-8")
 
     for warning in warnings:
         print(f"Warning: {warning}", file=sys.stderr)
 
-    if not made:
-        print("No world folders or archive files were packaged.")
-        return 0
+    print("Generated manifest:")
+    print(f"- {manifest_path.relative_to(ROOT)}")
 
-    print("Packaged files:")
-    for output in made:
-        print(f"- {output.relative_to(ROOT)}")
+    if per_pack:
+        print("Generated world archives:")
+        print(f"- {all_zip.relative_to(ROOT)}")
+        for entry in per_pack:
+            print(f"- {entry['archive']}")
+    if copied_archives:
+        print("Copied existing archives:")
+        for copied in copied_archives:
+            print(f"- {copied.relative_to(ROOT)}")
 
     return 0
 

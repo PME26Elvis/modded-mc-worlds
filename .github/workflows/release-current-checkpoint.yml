@@ -1,0 +1,58 @@
+name: Release Current Checkpoint
+
+on:
+  workflow_dispatch:
+    inputs:
+      notes:
+        description: Optional release notes
+        required: false
+        default: ""
+
+permissions:
+  contents: write
+
+jobs:
+  release-current-checkpoint:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: "3.x"
+
+      - name: Package world saves
+        run: python tools/worlds_tool.py package --out dist
+
+      - name: Create checkpoint release
+        env:
+          NOTES_INPUT: ${{ github.event.inputs.notes }}
+        run: |
+          set -euo pipefail
+          ts="$(date -u +'%Y-%m-%d-%H%M')"
+          tag="checkpoint-all-worlds-${ts}"
+          title="All Modded MC Worlds Checkpoint - $(date -u +'%Y-%m-%d %H:%M')"
+
+          notes_file="$(mktemp)"
+          if [ -n "${NOTES_INPUT}" ]; then
+            printf '%s\n\n' "${NOTES_INPUT}" > "${notes_file}"
+          fi
+          cat <<'EOF' >> "${notes_file}"
+This checkpoint release was generated from the current repository state.
+
+Includes:
+- Combined all-worlds archive
+- Per-pack main-world archives
+
+Note: `extras/` content is excluded from packaging.
+EOF
+
+          gh release create "${tag}" \
+            --title "${title}" \
+            --notes-file "${notes_file}" \
+            --latest=false \
+            dist/all/*.zip \
+            dist/worlds/*.zip
