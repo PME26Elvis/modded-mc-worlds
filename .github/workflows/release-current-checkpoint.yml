@@ -40,15 +40,15 @@ jobs:
           if [ -n "${NOTES_INPUT}" ]; then
             printf '%s\n\n' "${NOTES_INPUT}" > "${notes_file}"
           fi
-          cat <<'EOF' >> "${notes_file}"
-This checkpoint release was generated from the current repository state.
-
-Includes:
-- Combined all-worlds archive
-- Per-pack main-world archives
-
-Note: `extras/` content is excluded from packaging.
-EOF
+          {
+            printf '%s\n' 'This checkpoint release was generated from the current repository state.'
+            printf '\n'
+            printf '%s\n' 'Includes:'
+            printf '%s\n' '- Combined all-worlds archive'
+            printf '%s\n' '- Per-pack main-world archives'
+            printf '\n'
+            printf '%s\n' 'Note: `extras/` content is excluded from packaging.'
+          } >> "${notes_file}"
 
           gh release create "${tag}" \
             --title "${title}" \
