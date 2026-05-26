@@ -32,11 +32,17 @@ packs/skyfactory-4/worlds/main/playerdata/
 
 If the uploaded folder becomes `worlds/main/New World/level.dat`, the packaging workflow can still detect it and package the real world folder.
 
-## Packaging
+## Packaging current repo worlds
 
-The workflow `.github/workflows/package-worlds.yml` scans `packs/*/worlds/*`, detects valid Minecraft worlds by `level.dat`, and uploads zip files as a GitHub Actions artifact.
+The workflow `.github/workflows/package-worlds.yml` runs `python tools/worlds_tool.py package --out dist` and generates:
 
-It packages world saves only. Files under `extras/` are intentionally not included.
+- `dist/all/modded-mc-worlds-all-checkpoint-YYYY-MM-DD-HHmm.zip` (combined all-worlds archive)
+- `dist/worlds/<pack-slug>-main-checkpoint-YYYY-MM-DD-HHmm.zip` (one main-world archive per pack)
+- `dist/manifest.json` (machine-readable output paths and artifact-safe names)
+
+The combined archive contains each pack in its own top-level folder (`<pack-slug>-main/...`) to avoid collisions.
+
+Packaging includes world saves only. Files under `extras/` are intentionally excluded.
 
 ## Add a new modpack folder in Codespaces
 
@@ -49,3 +55,28 @@ python tools/worlds_tool.py new-pack
 ```bash
 python tools/worlds_tool.py package --out dist
 ```
+
+## Upload old staged checkpoints to Releases (manual)
+
+For old archives that should not be committed, stage files under:
+
+```text
+.local-checkpoints/<pack-slug>/
+```
+
+Then run:
+
+```bash
+python tools/release_checkpoints.py
+```
+
+This helper is interactive and uses `gh` CLI to create or upload to checkpoint-style releases (without moving/deleting staged files).
+
+## Release current checkpoint from GitHub Actions (manual)
+
+Use the **Release Current Checkpoint** workflow:
+
+- Workflow file: `.github/workflows/release-current-checkpoint.yml`
+- Trigger: `workflow_dispatch`
+- Optional input: notes
+- Behavior: re-packages current repo state and uploads both the combined archive and all per-pack main-world archives into a GitHub Release.
