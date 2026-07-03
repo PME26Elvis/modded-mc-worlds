@@ -9,6 +9,7 @@ Just my worlds.
 | FTB Presents Stoneblock 2 | `packs/ftb-presents-stoneblock-2` | 1.12.2 | 1.16.1 | CurseForge | `worlds/main` | 幾乎完全完結 |
 | Cuboid Outpost (Luxury Edition) | `packs/cuboid-outpost-luxury-edition` | 1.20.1 | 0.5.5 | CurseForge | `worlds/main` | END: Creative Item Cell & Energy |
 | Ozone Skyblock Reborn | `packs/ozone-skyblock-reborn` | 1.20.1 | 1.19.1 | CurseForge | `worlds/main` | 玩到後期 |
+| FTB StoneBlock 4 | `packs/ftb-stoneblock-4` | 1.21.1 | 1.11.1 | CurseForge | `worlds/main` | 與 Shiwan 一起遊玩，玩到一半，雞、作物、科技大致成熟，也已經解鎖很多升級，也在某些探索關卡上卡住 |
 
 ## Structure
 
