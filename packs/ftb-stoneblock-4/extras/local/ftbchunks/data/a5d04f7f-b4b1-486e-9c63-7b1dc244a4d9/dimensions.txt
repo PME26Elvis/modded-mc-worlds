@@ -1,0 +1,2 @@
+minecraft:overworld
+ftbteambases:private_for_cuboidoutpost_20260427_195804

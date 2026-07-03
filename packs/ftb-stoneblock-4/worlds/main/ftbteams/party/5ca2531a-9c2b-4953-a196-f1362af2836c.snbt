@@ -1,0 +1,112 @@
+{
+	id: "5ca2531a-9c2b-4953-a196-f1362af2836c"
+	type: "party"
+	owner: "8d535945-e9dd-4ae0-be2b-ac3ca9dc5d49"
+	ranks: {
+		f7a117cc-a9b0-4931-ac76-63e42cf827b3: "member"
+		8d535945-e9dd-4ae0-be2b-ac3ca9dc5d49: "owner"
+	}
+	properties: {
+		"ftbteams:display_name": "CuboidOutpost's Party"
+		"ftbteams:description": ""
+		"ftbteams:color": "#59FFD6"
+		"ftbteams:free_to_join": 0b
+		"ftbteams:max_msg_history_size": 1000
+		"ftbteams:team_stages": [
+			"echo_quartermaster_unlock"
+			"echo_guidance_stage1_task2_completed"
+			"echo_catalyst_stage3_task3_completed"
+			"echo_wayfinder_stage2_task1_completed"
+			"echo_enchanter_unlock"
+			"echo_fabricator_meet"
+			"echo_quartermaster_stage1_task2_check"
+			"echo_wayfinder_unlock"
+			"echo_magician_stage1_task2_check"
+			"echo_machinist_stage1_task1_check"
+			"echo_catalyst_unlock"
+			"echo_light_bender_stage3_task1_completed"
+			"echo_quartermaster_stage1_task1_check"
+			"echo_machinist_stage1_task1_completed"
+			"echo_catalyst_stage3_task2_completed"
+			"echo_catalyst_stage3_task2_check"
+			"echo_wayfinder_meet"
+			"echo_light_bender_unlock"
+			"home_unlocked"
+			"echo_guidance_stage1_task2_check"
+			"echo_magician_stage1_task1_check"
+			"echo_guidance_stage1_task1_completed"
+			"echo_infernal_meet"
+			"echo_enchanter_stage2_task2_check"
+			"echo_machinist_stage1_task2_check"
+			"echo_wayfinder_stage2_task1_check"
+			"echo_enchanter_meet"
+			"echo_wyrmwright_stage4_task1_check"
+			"echo_light_bender_stage3_task2_completed"
+			"echo_guidance_interact"
+			"echo_machinist_meet"
+			"world_engine_unlocked"
+			"echo_quartermaster_stage1_task2_completed"
+			"echo_fabricator_stage2_task1_check"
+			"echo_stage3_or_check"
+			"echo_guidance_stage2_task1_check"
+			"echo_guidance_stage3_task1_check"
+			"echo_catalyst_stage3_task1_check"
+			"echo_magician_meet"
+			"parkour_vault"
+			"echo_wyrmwright_meet"
+			"echo_guidance_stage1_task1_check"
+			"echo_machinist_stage1_task2_completed"
+			"echo_catalyst_meet"
+			"echo_catalyst_stage3_task1_completed"
+			"echo_magician_unlock"
+			"echo_guidance_stage1_final_check"
+			"echo_stage1_or_check"
+			"echo_magician_stage1_task2_completed"
+			"echo_guidance_stage3_task1_completed"
+			"echo_quartermaster_meet"
+			"echo_infernal_unlock"
+			"echo_enchanter_stage2_task1_check"
+			"echo_quartermaster_stage1_task1_completed"
+			"echo_twilight_ancients_unlock"
+			"echo_light_bender_stage3_task1_check"
+			"echo_guidance_stage1_final_completed"
+			"echo_enchanter_stage2_task1_completed"
+			"echo_machinist_unlock"
+			"echo_guidance_meet"
+			"echo_guidance_stage1_task3_completed"
+			"echo_fabricator_unlock"
+			"echo_wyrmwright_unlock"
+			"echo_fabricator_stage2_task1_completed"
+			"echo_wyrmwright_stage4_task1_completed"
+			"echo_guidance_stage1_task3_check"
+			"echo_light_bender_meet"
+			"echo_catalyst_stage3_task3_check"
+			"echo_guidance_stage2_task1_completed"
+			"echo_magician_stage1_task1_completed"
+			"echo_enchanter_stage2_task2_completed"
+			"echo_light_bender_stage3_task2_check"
+		]
+		"ftbteams:lives_remaining": 0
+		"ftbchunks:allow_explosions": 0b
+		"ftbchunks:allow_mob_griefing": 0b
+		"ftbchunks:allow_fake_players": 0b
+		"ftbchunks:allow_named_fake_players": [ ]
+		"ftbchunks:allow_fake_players_by_id": 1b
+		"ftbchunks:allow_pvp": 1b
+		"ftbchunks:block_edit_mode": "allies"
+		"ftbchunks:block_interact_mode": "allies"
+		"ftbchunks:entity_interact_mode": "allies"
+		"ftbchunks:nonliving_entity_attack_mode": "allies"
+		"ftbchunks:claim_visibility": "public"
+		"ftbchunks:location_mode": "allies"
+	}
+	message_history: [
+		{ from: "00000000-0000-0000-0000-000000000000", date: 1777291084311L, text: "{\"translate\":\"ftbteams.message.joined\",\"with\":[\"CuboidOutpost\"],\"color\":\"yellow\"}" }
+		{ from: "8d535945-e9dd-4ae0-be2b-ac3ca9dc5d49", date: 1777291243422L, text: "{\"translate\":\"ftbteams.message.add_ally\",\"with\":[{\"text\":\"o0ShiWan0o\",\"color\":\"yellow\"}],\"color\":\"green\"}" }
+		{ from: "8d535945-e9dd-4ae0-be2b-ac3ca9dc5d49", date: 1777291422501L, text: "{\"translate\":\"ftbteams.message.invited\",\"with\":[{\"text\":\"o0ShiWan0o\",\"color\":\"yellow\"}],\"color\":\"green\"}" }
+		{ from: "00000000-0000-0000-0000-000000000000", date: 1777291437647L, text: "{\"translate\":\"ftbteams.message.joined\",\"with\":[\"o0ShiWan0o\"],\"color\":\"green\"}" }
+	]
+	extra: {
+		world_engine_checker_1: 1b
+	}
+}

@@ -1,0 +1,28 @@
+{
+	collapsed: {
+		"ftbechoes:t1_echo_quartermaster": [I;2]
+		"ftbechoes:t0_echo_guidance": [I;
+			4
+			5
+			6
+		]
+		"ftbechoes:t2_echo_fabricator": [I;1]
+		"ftbechoes:t3_echo_catalyst": [I;
+			2
+			3
+		]
+		"ftbechoes:t1_echo_magician": [I;
+			1
+			2
+		]
+		"ftbechoes:t3_echo_light_bender": [I;2]
+		"ftbechoes:t1_echo_machinist": [I;
+			0
+			1
+			2
+		]
+		"ftbechoes:t4_echo_wyrmwright": [I;1]
+		"ftbechoes:t2_echo_enchanter": [I;2]
+		"ftbechoes:t2_echo_wayfinder": [I;1]
+	}
+}

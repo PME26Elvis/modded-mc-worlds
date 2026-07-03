@@ -1,0 +1,40 @@
+{
+	max_claim_chunks: 500
+	max_force_load_chunks: 25
+	last_login_time: 1778688630090L
+	chunks: {
+		"ftbteambases:private_for_cuboidoutpost_20260427_195804": [
+			{ x: -1, z: -2, time: 1777814171583L, force_loaded: 1777814172916L }
+			{ x: 0, z: -2, time: 1777723151352L, force_loaded: 1777723152324L }
+			{ x: -4, z: -1, time: 1778407843611L, force_loaded: 1778407845056L }
+			{ x: 0, z: 0, time: 1777723151629L, force_loaded: 1777723152323L }
+			{ x: -1, z: -3, time: 1777814171202L, force_loaded: 1777814172625L }
+			{ x: -2, z: -1, time: 1777814171202L, force_loaded: 1777814172626L }
+			{ x: -3, z: -1, time: 1778407844518L, force_loaded: 1778407844905L }
+			{ x: -2, z: -2, time: 1777814171202L, force_loaded: 1777814172626L }
+			{ x: -2, z: 0, time: 1777814171202L, force_loaded: 1777814172625L }
+			{ x: -2, z: -3, time: 1777814171202L, force_loaded: 1777814172623L }
+			{ x: -1, z: -1, time: 1777723150869L, force_loaded: 1777723152678L }
+			{ x: -1, z: 0, time: 1777723151818L, force_loaded: 1777723152677L }
+			{ x: 0, z: -1, time: 1777723151097L, force_loaded: 1777723152322L }
+		]
+	}
+	member_data: {
+		8d535945-e9dd-4ae0-be2b-ac3ca9dc5d49: {
+			max_force_loaded_chunks: 25
+			max_claimed_chunks: 500
+			offline_force_loader: 0b
+		}
+		f7a117cc-a9b0-4931-ac76-63e42cf827b3: {
+			max_force_loaded_chunks: 25
+			max_claimed_chunks: 500
+			offline_force_loader: 0b
+		}
+	}
+	prevented_access: {
+		7400926d-1007-4e53-880f-b43e67f2bf29: {
+			name: "Ars_Nouveau"
+			when: 1778509305563L
+		}
+	}
+}
