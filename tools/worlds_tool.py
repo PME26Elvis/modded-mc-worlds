@@ -155,14 +155,20 @@ def find_world_roots(world_slot: Path) -> list[Path]:
     return roots
 
 
-def add_world_to_zip(source: Path, output: Path, prefix: str | None = None) -> None:
+def add_directory_to_zip(zf: ZipFile, source: Path, prefix: str) -> None:
+    if not source.is_dir():
+        return
+    for file in sorted(p for p in source.rglob("*") if p.is_file()):
+        rel = file.relative_to(source)
+        if is_ignored(rel):
+            continue
+        zf.write(file, (Path(prefix) / rel).as_posix())
+
+
+def add_pack_checkpoint_to_zip(world_root: Path, extras_dir: Path, output: Path) -> None:
     with ZipFile(output, "w", ZIP_DEFLATED) as zf:
-        for file in sorted(p for p in source.rglob("*") if p.is_file()):
-            rel = file.relative_to(source)
-            if is_ignored(rel):
-                continue
-            target = Path(prefix) / rel if prefix else rel
-            zf.write(file, target.as_posix())
+        add_directory_to_zip(zf, world_root, "world-main")
+        add_directory_to_zip(zf, extras_dir, "extras")
 
 
 def copy_existing_archive(pack_name: str, archive: Path, worlds_dir: Path, out_dir: Path) -> Path:
@@ -226,7 +232,7 @@ def package_worlds(out_dir: Path) -> int:
 
         per_pack_name = f"{safe_name(pack_name)}-main-checkpoint-{timestamp}.zip"
         per_pack_output = worlds_dir / per_pack_name
-        add_world_to_zip(main_root, per_pack_output)
+        add_pack_checkpoint_to_zip(main_root, pack_dir / "extras", per_pack_output)
 
         per_pack.append(
             {
@@ -241,12 +247,10 @@ def package_worlds(out_dir: Path) -> int:
         with ZipFile(all_zip, "w", ZIP_DEFLATED) as zf:
             for entry in per_pack:
                 world_root = ROOT / entry["world_root"]
-                prefix = f"{entry['pack_slug']}-main"
-                for file in sorted(p for p in world_root.rglob("*") if p.is_file()):
-                    rel = file.relative_to(world_root)
-                    if is_ignored(rel):
-                        continue
-                    zf.write(file, (Path(prefix) / rel).as_posix())
+                pack_dir = PACKS_DIR / entry["pack_slug"]
+                prefix = entry["pack_slug"]
+                add_directory_to_zip(zf, world_root, f"{prefix}/world-main")
+                add_directory_to_zip(zf, pack_dir / "extras", f"{prefix}/extras")
 
     manifest = {
         "generated_at_utc": datetime.now(timezone.utc).isoformat(),
