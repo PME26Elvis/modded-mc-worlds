@@ -1,0 +1,219 @@
+
+[multiblocks]
+	#Controls multiblock disassembly behavior. PROCESS_QUEUE = gradual block removal using fake player actions. TEMPLATE_BLOCKS = reverts structure to placeholder blocks (like vanilla IE behavior).
+	#Allowed Values: PROCESS_QUEUE, TEMPLATE_BLOCKS
+	disassemblyMode = "PROCESS_QUEUE"
+	#Divisor applied to fuel burn times (higher value = slower fuel consumption).
+	#Range: > 1
+	burnTimeDivider = 10
+	#Global multiplier applied to Alternator power generation (1.0 = default, 2.0 = double output, 0.5 = half).
+	#Range: 0.0 ~ 1000.0
+	alternator_power_factor = 1.0
+	#Internal energy buffer capacity of the Alternator (in FE).
+	#Range: > 1
+	alternator_energy_capacity = 1200000
+	#Base inertia mass for the Alternator's mechanical consumer.
+	#Range: 0.0 ~ 1.7976931348623157E308
+	alternator_base_mass = 2.0
+	#Friction coefficient affecting rotational deceleration of the Alternator.
+	#Range: 0.0 ~ 1.7976931348623157E308
+	alternator_friction = 0.0
+	#Hard cap on FE/t output from the Alternator before power factor and other modifiers are applied.
+	#Range: > 0
+	alternator_max_output = 12288
+
+	#Advanced Coke Oven settings
+	[multiblocks.advanced_coke_oven]
+		#Base processing speed multiplier (1.0 = normal speed).
+		#Range: 0.1 ~ 10.0
+		speed_base = 1.0
+		#Additive speed bonus per active base heater.
+		#Range: 0.0 ~ 5.0
+		baseheater_speed_increase = 0.25
+		#Multiplicative speed bonus per active base heater.
+		#Range: 1.0 ~ 5.0
+		baseheater_speed_multiplier = 1.25
+		#Maximum energy storage capacity of the Advanced Coke Oven Base Heater (in FE).
+		#Range: > 1000
+		baseheater_max_energy = 8000
+		#Energy consumption per tick when the base heater is active (in FE/t).
+		#Range: 1 ~ 1024
+		baseheater_energy_consumption = 32
+
+	#Solid Fuel Boiler settings
+	[multiblocks.boiler_solid]
+		#Passive heat loss per server tick.
+		#Range: 0.0 ~ 1.7976931348623157E308
+		heat_loss_per_tick = 0.2
+		#Minimum heat maintained by the pilot light.
+		#Range: 0.0 ~ 1.7976931348623157E308
+		pilot_heat = 20.0
+		#Interval multiplier for pilot light fuel consumption (higher = less frequent usage).
+		#Range: > 1
+		pilot_multiplier = 15
+		#Heat gain per tick from fuel when no recipe is active.
+		#Range: 0.0 ~ 1.7976931348623157E308
+		default_heat_per_tick = 0.1
+
+	#Liquid Fuel Boiler settings
+	[multiblocks.boiler_liquid]
+		#Input fuel tank size (mB).
+		#Range: > 1000
+		tank_capacity = 24000
+		#Passive heat loss per server tick.
+		#Range: 0.0 ~ 1.7976931348623157E308
+		heat_loss_per_tick = 0.2
+		#Minimum heat maintained by the pilot light.
+		#Range: 0.0 ~ 1.7976931348623157E308
+		pilot_heat = 20.0
+
+	#Tank Boiler settings
+	[multiblocks.boiler_tank]
+		#Capacity of input and output fluid tanks (mB).
+		#Range: > 1000
+		tank_capacity = 24000
+		#Recipe progress lost per tick when below required heat.
+		#Range: > 0
+		progress_loss_per_tick = 1
+
+	#Distiller settings
+	[multiblocks.distiller]
+		#Capacity of input and output fluid tanks (mB).
+		#Range: > 1000
+		tank_capacity = 24000
+		#Internal energy buffer size (FE).
+		#Range: > 1000
+		energy_capacity = 32000
+
+	#Gas Turbine settings
+	[multiblocks.gas_turbine]
+		#Capacity of input and output fluid tanks (mB).
+		#Range: > 1000
+		tank_capacity = 12000
+		#High-voltage energy buffer capacity (FE).
+		#Range: > 1000
+		energy_capacity_hv = 8192
+		#Medium-voltage buffer for starter/sparkplug (FE).
+		#Range: > 100
+		energy_capacity_mv = 2048
+		#FE/t consumed by the electric starter motor.
+		#Range: > 0
+		starter_consumption = 4096
+		#FE per ignition attempt by the sparkplug.
+		#Range: > 0
+		sparkplug_consumption = 1024
+		#Base inertia mass for rotational dynamics.
+		#Range: 0.0 ~ 1.7976931348623157E308
+		base_mass = 8.0
+		#Base torque output from combustion (affects acceleration).
+		#Range: 0.0 ~ 1.7976931348623157E308
+		drive_torque = 30.0
+		#Friction coefficient affecting rotational deceleration.
+		#Range: 0.0 ~ 1.7976931348623157E308
+		friction = 60.0
+		#Maximum achievable speed as fraction of MechanicalCapabilities.MAX_RPM.
+		#Range: 0.01 ~ 1.0
+		max_speed_factor = 0.5
+
+	#Heat Exchanger settings
+	[multiblocks.heat_exchanger]
+		#Capacity per input tank (mB).
+		#Range: > 1000
+		input_tank_capacity = 10000
+		#Capacity per output tank (mB).
+		#Range: > 1000
+		output_tank_capacity = 10000
+		#Internal energy buffer capacity (FE).
+		#Range: > 1000
+		energy_capacity = 2048
+		#Maximum FE/t that can be received or extracted.
+		#Range: > 0
+		energy_max_io = 1024
+
+	#Solar Melter settings
+	[multiblocks.solar_melter]
+		#Base heat loss per tick during daylight (before sky darkness penalties).
+		#Range: 0.0 ~ 1.7976931348623157E308
+		day_min_heat_loss = 0.0
+		#Additional heat loss per unit of sky darkness.
+		#Range: 0.0 ~ 1.7976931348623157E308
+		loss_per_section_drop = 0.035
+		#Temperature-scaled heat loss multiplier.
+		#Range: 0.0 ~ 1.7976931348623157E308
+		temp_dependent_loss_factor = 3.6E-4
+		#Heat gain per reflector strength unit under ideal sunlight.
+		#Range: 0.0 ~ 1.7976931348623157E308
+		heat_increase_factor = 0.00568
+		#Divisor used to compute minimum reflectors needed for recipe temperature.
+		#Range: 1.0 ~ 1.7976931348623157E308
+		temp_to_min_reflectors_divisor = 25.0
+		#Additional reflectors required per tier difference in temperature demand.
+		#Range: 0.0 ~ 1.7976931348623157E308
+		reflector_tier_offset = 4.0
+		#Recipe progress lost per tick below required temperature.
+		#Range: > 0
+		progress_loss_off_temp = 2
+		#Global process speed multiplier (1.0 = default).
+		#Range: 0.01 ~ 10.0
+		speed_multiplier = 1.0
+
+	#Solar Tower settings
+	[multiblocks.solar_tower]
+		#Base heat loss per tick during daylight (before sky darkness penalties).
+		#Range: 0.0 ~ 1.7976931348623157E308
+		day_min_heat_loss = 0.0
+		#Additional heat loss per unit of sky darkness.
+		#Range: 0.0 ~ 1.7976931348623157E308
+		loss_per_section_drop = 0.035
+		#Temperature-scaled heat loss multiplier.
+		#Range: 0.0 ~ 1.7976931348623157E308
+		temp_dependent_loss_factor = 6.0E-4
+		#Heat gain per reflector strength unit under ideal sunlight.
+		#Range: 0.0 ~ 1.7976931348623157E308
+		heat_increase_factor = 0.003
+		#Divisor used to compute minimum reflectors needed for recipe temperature.
+		#Range: 1.0 ~ 1.7976931348623157E308
+		temp_to_min_reflectors_divisor = 25.0
+		#Additional reflectors required per tier difference in temperature demand.
+		#Range: 0.0 ~ 1.7976931348623157E308
+		reflector_tier_offset = 4.0
+		#Recipe progress lost per tick below required temperature.
+		#Range: > 0
+		progress_loss_off_temp = 2
+		#Global process speed multiplier (1.0 = default).
+		#Range: 0.01 ~ 10.0
+		speed_multiplier = 1.0
+
+	#Steam Turbine settings
+	[multiblocks.steam_turbine]
+		#Capacity of input and output fluid tanks (mB).
+		#Range: > 1000
+		tank_capacity = 12000
+		#Base inertia mass for rotational dynamics.
+		#Range: 0.0 ~ 1.7976931348623157E308
+		base_mass = 10.0
+		#Base torque output from steam expansion.
+		#Range: 0.0 ~ 1.7976931348623157E308
+		drive_torque = 360.0
+		#Friction coefficient affecting rotational deceleration.
+		#Range: 0.0 ~ 1.7976931348623157E308
+		friction = 0.0
+		#Maximum achievable speed as fraction of global max RPM.
+		#Range: 0.01 ~ 1.0
+		max_speed_factor = 1.0
+
+	#Creative Barrel settings
+	[multiblocks.barrel_creative]
+		#Maximum fluid output per tick (for creative/testing use).
+		#Range: > 1
+		creativeBarrelOutputAmount = 2147483647
+
+	#Steel Sheetmetal Tank settings
+	[multiblocks.steel_sheetmetal_tank]
+		#Total fluid storage capacity (mB).
+		#Range: > 1000
+		capacity = 2048000
+		#Maximum fluid transfer rate per tick (mB/t).
+		#Range: > 1
+		transfer_speed = 1000
+
