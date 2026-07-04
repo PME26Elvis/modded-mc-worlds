@@ -10,6 +10,7 @@ Just my worlds.
 | Cuboid Outpost (Luxury Edition) | `packs/cuboid-outpost-luxury-edition` | 1.20.1 | 0.5.5 | CurseForge | `worlds/main` | END: Creative Item Cell & Energy |
 | Ozone Skyblock Reborn | `packs/ozone-skyblock-reborn` | 1.20.1 | 1.19.1 | CurseForge | `worlds/main` | 玩到後期 |
 | FTB StoneBlock 4 | `packs/ftb-stoneblock-4` | 1.21.1 | 1.11.1 | CurseForge | `worlds/main` | 與 Shiwan 一起遊玩，玩到一半，雞、作物、科技大致成熟，也已經解鎖很多升級，也在某些探索關卡上卡住 |
+| Project Arc Light: The Hanging Pavilion | `packs/project-arc-light-the-hanging-pavilion` | 1.20.1 | 1.2.6 | CurseForge | `worlds/main` | 有點太肝了，玩不下去 |
 
 ## Structure
 
@@ -38,12 +39,12 @@ If the uploaded folder becomes `worlds/main/New World/level.dat`, the packaging 
 The workflow `.github/workflows/package-worlds.yml` runs `python tools/worlds_tool.py package --out dist` and generates:
 
 - `dist/all/modded-mc-worlds-all-checkpoint-YYYY-MM-DD-HHmm.zip` (combined all-worlds archive)
-- `dist/worlds/<pack-slug>-main-checkpoint-YYYY-MM-DD-HHmm.zip` (one main-world archive per pack)
+- `dist/worlds/<pack-slug>-main-checkpoint-YYYY-MM-DD-HHmm.zip` (one checkpoint archive per pack, with `world-main/` and `extras/` folders)
 - `dist/manifest.json` (machine-readable output paths and artifact-safe names)
 
-The combined archive contains each pack in its own top-level folder (`<pack-slug>-main/...`) to avoid collisions.
+The combined archive contains each pack in its own top-level folder (`<pack-slug>/world-main/...` and `<pack-slug>/extras/...`) to avoid collisions.
 
-Packaging includes world saves only. Files under `extras/` are intentionally excluded.
+Packaging includes the main world save plus each pack's `extras/` folder.
 
 ## Add a new modpack folder in Codespaces
 
@@ -80,4 +81,4 @@ Use the **Release Current Checkpoint** workflow:
 - Workflow file: `.github/workflows/release-current-checkpoint.yml`
 - Trigger: `workflow_dispatch`
 - Optional input: notes
-- Behavior: re-packages current repo state and uploads both the combined archive and all per-pack main-world archives into a GitHub Release.
+- Behavior: re-packages current repo state and uploads both the combined archive and all per-pack checkpoint archives into a GitHub Release. Each per-pack archive contains `world-main/` and `extras/`.
