@@ -1,0 +1,7 @@
+#
+#waypoint:name:initials:x:y:z:color:disabled:type:set:rotate_on_tp:tp_yaw:visibility_type
+#
+waypoint:silver:S:-362:64:394:14:false:0:gui.xaero_default:false:0:0
+waypoint:gold:G:-207:64:436:14:false:0:gui.xaero_default:false:0:0
+waypoint:copper:C:-250:64:246:12:false:0:gui.xaero_default:false:0:0
+waypoint:iron:I:-245:64:363:3:false:0:gui.xaero_default:false:0:0
