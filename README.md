@@ -1,5 +1,14 @@
 # Modded Minecraft Worlds
-Just my worlds.
+
+Just my personal Minecraft world save checkpoints.
+
+> **Unofficial project notice:** This repository is not an official Minecraft product, service, or modpack. It is not approved by or associated with Mojang, Microsoft, CurseForge, FTB, any referenced modpack author, or any individual mod author.
+>
+> This repository is intended to store my personal world saves and gameplay notes only. It is not intended to redistribute Minecraft, mod `.jar` files, complete modpacks, paid content, or the original creative work of modpack authors such as full config, KubeJS, quest, script, or override packs.
+>
+> To use any world save here, you must own a legitimate copy of Minecraft Java Edition and install the corresponding modpack from its official distribution source.
+>
+> Minecraft, mods, modpacks, textures, models, sounds, quests, configs, scripts, and other third-party assets remain the property of their respective owners.
 
 ## Modpacks
 
