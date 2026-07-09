@@ -53,7 +53,7 @@ The workflow `.github/workflows/package-worlds.yml` runs `python tools/worlds_to
 
 The combined archive contains each pack in its own top-level folder (`<pack-slug>/world-main/...` and `<pack-slug>/extras/...`) to avoid collisions.
 
-Packaging includes the main world save plus each pack's `extras/` folder.
+Packaging includes the main world save plus each pack's `extras/` folder. FTB local client data that can preserve map/chunk context (for example `extras/local/ftbchunks/**`, `ftbquests`, `ftbutilities`, and related FTB client `.snbt` files) is included, while unrelated local scratch data, CrashAssistant output, `.jar`, `.dll`, `*_args.info`, and `username.info` files are excluded.
 
 ## Add a new modpack folder in Codespaces
 
@@ -90,4 +90,4 @@ Use the **Release Current Checkpoint** workflow:
 - Workflow file: `.github/workflows/release-current-checkpoint.yml`
 - Trigger: `workflow_dispatch`
 - Optional input: notes
-- Behavior: re-packages current repo state and uploads both the combined archive and all per-pack checkpoint archives into a GitHub Release. Each per-pack archive contains `world-main/` and `extras/`.
+- Behavior: scans for sensitive launch/account artifacts, re-packages current repo state, and uploads both the combined archive and all per-pack checkpoint archives into a GitHub Release. Each per-pack archive contains `world-main/` and sanitized `extras/`.

@@ -24,6 +24,9 @@ jobs:
         with:
           python-version: "3.x"
 
+      - name: Scan for sensitive launch/account artifacts
+        run: python tools/worlds_tool.py scan-sensitive
+
       - name: Package world saves
         run: python tools/worlds_tool.py package --out dist
 

@@ -12,6 +12,9 @@ desktop.ini
 **/server-icon.png
 **/session.lock
 
+# Python caches
+**/__pycache__/
+
 # Optional: launcher/cache files if accidentally copied
 **/.mixin.out/
 **/cache/
@@ -29,3 +32,11 @@ dist/
 *.tar
 *.tar.gz
 *.tgz
+
+# Local Minecraft client/launcher caches and risky launch artifacts
+packs/*/extras/local/crash_assistant/
+packs/*/extras/local/**/crash_assistant/
+packs/*/extras/local/**/*.jar
+packs/*/extras/local/**/*.dll
+packs/*/extras/local/**/*_args.info
+packs/*/extras/local/**/username.info
